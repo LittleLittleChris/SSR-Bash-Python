@@ -1,6 +1,12 @@
 #!/bin/bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
+sumdc(){
+	sum1=`cat /proc/sys/kernel/random/uuid| cksum | cut -f1 -d" "|head -c 2`
+	sum2=`cat /proc/sys/kernel/random/uuid| cksum | cut -f1 -d" "|head -c 1`
+	solve=`echo "$sum1-$sum2"|bc`
+	echo -e "请输入\e[32;49m $sum1-$sum2 \e[0m的运算结果,表示你已经确认,输入错误将退出"
+	read sv
+}
 #Check Root
 [ $(id -u) != "0" ] && { echo "Error: You must be root to run this script"; exit 1; }
 
@@ -64,12 +70,16 @@ fi
 
 if [[ $tc == 3 ]];then
 	read -p "输入yes确认清空： " uid
-	if [[ $uid == yes ]];then
+	if [[ "$sv" == "$solve" ]];then
 		cd /usr/local/shadowsocksr
 		python mujson_mgr.py -c
 		echo "已清空全部用户的流量使用记录"
-
+	else
+		echo "计算错误，正确结果为$solve"	
+	fi
+		
 	echo ""
 	bash /usr/local/SSR-Bash-Python/traffic.sh
+	
 fi
 
