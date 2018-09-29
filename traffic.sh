@@ -69,7 +69,7 @@ if [[ $tc == 2 ]];then
 fi
 
 if [[ $tc == 3 ]];then
-	read -p "输入yes确认清空： " uid
+	sumdc
 	if [[ "$sv" == "$solve" ]];then
 		cd /usr/local/shadowsocksr
 		python mujson_mgr.py -c
