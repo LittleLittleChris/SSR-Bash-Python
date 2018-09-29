@@ -152,11 +152,11 @@ if [[ "$sv" == "$solve" ]];then
 		echo "还原操作已完成，开始检测是否已生效!"
 		bash /usr/local/SSR-Bash-Python/servercheck.sh test
 		if [[ -z ${SSRcheck} ]];then
-			echo "配置已生效，还原成功"
+			
 			bash /usr/local/shadowsocksr/stop.sh
 			bash /usr/local/shadowsocksr/logrun.sh
 			iptables-restore < /etc/iptables.up.rules
-			clear
+			echo "配置已生效，还原成功"
 			echo "ShadowsocksR服务器已重启"
 		else
 			echo "配置未生效，还原失败，请联系作者解决"
