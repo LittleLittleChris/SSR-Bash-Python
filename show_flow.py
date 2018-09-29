@@ -19,10 +19,7 @@ for x in json:
   	transfer_enable_int = transfer_enable_int/1024
   	transfer_unit = "GB"
   if(d_int > 1024):
-	print(round(d_int/1024,2))
-	print(format(float(d_int)/float(1024),'.2f'))
-	print('%.2f' %(d_int/1024))
-  	d_int = d_int/1024
+  	d_int = format(float(d_int)/float(1024),'.2f')
   	d_unit = "GB"
 
   #Print In Format
